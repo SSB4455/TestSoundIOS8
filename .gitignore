@@ -62,3 +62,20 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+# SSB4455
+# =========================
+Assets/Resources/Songs/lalala
+Assets/Resources/Songs/lalala.meta
+Assets/UnityVS
+Assets/UnityVS.meta
+Demo/
+
+
+
+
+
+
+
+

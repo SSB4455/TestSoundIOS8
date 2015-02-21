@@ -8,10 +8,12 @@ using UnityEngine;
 
 public class TestSongPlayer : MonoBehaviour
 {
+	public GameObject soundPlayerPrefab;
+
 	public string BmsPath { get; set; }
 	public AudioSource audioSource;
-	//List<AudioSource> audioSourceList = new List<AudioSource>();
-	//List<AudioSource> audioSourcePlayingList = new List<AudioSource>();
+	List<AudioSource> audioSourceList = new List<AudioSource>();
+	List<AudioSource> audioSourcePlayingList = new List<AudioSource>();
 	Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 	List<MusicNote> musicNotes = new List<MusicNote>();
 	public float BPM { get; private set; }
@@ -28,14 +30,14 @@ public class TestSongPlayer : MonoBehaviour
 	{
 		Debug.Log("Stopwatch.Frequency = " + System.Diagnostics.Stopwatch.Frequency);
 
-		/*for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			//audioSourceList.Add((Instantiate(soundPlayerPrefab) as GameObject).GetComponent<AudioSource>());
-		}*/
+			audioSourceList.Add((Instantiate(soundPlayerPrefab) as GameObject).GetComponent<AudioSource>());
+		}
 
 
 		BmsPath = @"Songs/lalala/LALALA";
-		//BmsPath = @"Songs/compose/bms";
+		BmsPath = @"Songs/compose/bms";
 
 		string bathPath = BmsPath.Substring(0, BmsPath.LastIndexOf("/") + 1);
 		string[] musicScoreLines = ((TextAsset)Resources.Load(BmsPath)).text.Split(new char[1] { '\n' });
@@ -102,14 +104,14 @@ public class TestSongPlayer : MonoBehaviour
 			playI++;
 		}
 
-		/*for (int i = 0; i < audioSourcePlayingList.Count; i++)
+		for (int i = 0; i < audioSourcePlayingList.Count; i++)
 		{
 			if (!audioSourcePlayingList[i].isPlaying)
 			{
 				audioSourceList.Add(audioSourcePlayingList[i]);
 				audioSourcePlayingList.RemoveAt(i--);
 			}
-		}*/
+		}
 
 		// exit
 		if (Input.GetKeyDown(KeyCode.Home) || Input.GetKeyDown(KeyCode.Escape))
@@ -129,23 +131,22 @@ public class TestSongPlayer : MonoBehaviour
 
 	public bool PlayWAVById(string wavId)
 	{
-		/*if (audioSourceList.Count < 1)
+		if (audioSourceList.Count < 1)
 		{
+			Debug.Log("audioSource not enough");
 			return false;
 		}
 
 		AudioSource audioSource = audioSourceList[0];
 		audioSource.clip = audioClips[wavId];
 		audioSource.Play();
-		//audioSource.PlayOneShot(audioClips[wavId]);
 
 		audioSourceList.RemoveAt(0);
 		audioSourcePlayingList.Add(audioSource);
 		return true;
-		*/
 		
-		audioSource.PlayOneShot(audioClips[wavId]);
-		return true;
+		//audioSource.PlayOneShot(audioClips[wavId]);
+		//return true;
 	}
 
 	void OnApplicationPause()

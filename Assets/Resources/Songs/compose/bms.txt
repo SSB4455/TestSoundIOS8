@@ -1,5 +1,5 @@
 BPM	150
 
-WAV	01	0
+WAV	01	BGM1
 
 MusicNote	0	1	01

@@ -68,7 +68,7 @@ public class ShowFPS : MonoBehaviour {
 	
 	private void OnGUI ()
 	{
-		GUILayout.Label("FPS:" + minFPS.ToString("F2") + "\nMaxDeltaTime:" + maxDeltaTime, fpsStyle);
+		GUILayout.Label("FPS:" + currFPS.ToString("F2") + "\nMinFPS:" + minFPS.ToString("F2") + "\nDeltaTime:" + Time.deltaTime + "\nMaxDeltaTime:" + maxDeltaTime, fpsStyle);
 	}
 
 }

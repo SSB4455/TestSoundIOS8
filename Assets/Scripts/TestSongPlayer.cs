@@ -23,6 +23,9 @@ public class TestSongPlayer : MonoBehaviour
 	public long PlayTicks { get { return playTime; } }
 	int playI = 0;
 
+	float gcTime = 0;
+	bool canGC = true;
+
 	
 	
 	// Use this for initialization
@@ -97,6 +100,7 @@ public class TestSongPlayer : MonoBehaviour
 	void Update ()
 	{
 		playTime += (long)(Time.deltaTime * 10000000L);
+		gcTime += Time.deltaTime;
 		while (playI < musicNotes.Count && musicNotes[playI].InsertTime <= PlayTicks)
 		{
 			PlayWAVById(musicNotes[playI].WAVId);
@@ -111,6 +115,14 @@ public class TestSongPlayer : MonoBehaviour
 				audioSourceList.Add(audioSourcePlayingList[i]);
 				audioSourcePlayingList.RemoveAt(i--);
 			}
+		}
+
+		if (gcTime > 30f && canGC)
+		{
+			Debug.Log("Initiative System.GC.Collect()");
+			System.GC.Collect();
+			gcTime = 0;
+			canGC = false;
 		}
 
 		// exit
